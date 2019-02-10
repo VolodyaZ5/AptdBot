@@ -19,7 +19,8 @@ namespace Anketa
         //Заблокировать действие до завершения загрузки
         object lockAction = new object();
         //загрузка завершена
-        bool isCompleted = false;        
+        bool isCompleted = false;
+        IWebDriver browser;
 
         public frmMain()
         {
@@ -44,13 +45,12 @@ namespace Anketa
         private void btnToSite_Click(object sender, EventArgs e)
         {
             string aptdUrl = @"http://armptd.ru/";
-            //webBrz.Navigate(aptdUrl);
+            ////webBrz.Navigate(aptdUrl);
             WebNavigate(aptdUrl);
-            
+
             string anketaUrl = @"http://nok.rosminzdrav.ru/site.html#!/23/2154#reviews";
-            webBrz.Navigate(anketaUrl);
+            ////webBrz.Navigate(anketaUrl);
             WebNavigate(anketaUrl);            
-                        
                         
         }       
 

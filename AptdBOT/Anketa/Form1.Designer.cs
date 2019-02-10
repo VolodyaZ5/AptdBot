@@ -30,7 +30,6 @@
         {
             this.webBrz = new System.Windows.Forms.WebBrowser();
             this.btnToSite = new System.Windows.Forms.Button();
-            this.btnFillAnketa = new System.Windows.Forms.Button();
             this.lblProxyInfo = new System.Windows.Forms.Label();
             this.btnUseProxy = new System.Windows.Forms.Button();
             this.txtProxyInput = new System.Windows.Forms.TextBox();
@@ -59,16 +58,6 @@
             this.btnToSite.Text = "Перейти на сайт";
             this.btnToSite.UseVisualStyleBackColor = true;
             this.btnToSite.Click += new System.EventHandler(this.btnToSite_Click);
-            // 
-            // btnFillAnketa
-            // 
-            this.btnFillAnketa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFillAnketa.Location = new System.Drawing.Point(899, 330);
-            this.btnFillAnketa.Name = "btnFillAnketa";
-            this.btnFillAnketa.Size = new System.Drawing.Size(185, 39);
-            this.btnFillAnketa.TabIndex = 6;
-            this.btnFillAnketa.Text = "Заполнить анкету";
-            this.btnFillAnketa.UseVisualStyleBackColor = true;
             // 
             // lblProxyInfo
             // 
@@ -129,7 +118,6 @@
             this.Controls.Add(this.txtProxyInput);
             this.Controls.Add(this.btnUseProxy);
             this.Controls.Add(this.lblProxyInfo);
-            this.Controls.Add(this.btnFillAnketa);
             this.Controls.Add(this.btnToSite);
             this.Controls.Add(this.webBrz);
             this.Name = "frmMain";
@@ -145,7 +133,6 @@
 
         private System.Windows.Forms.WebBrowser webBrz;
         private System.Windows.Forms.Button btnToSite;
-        private System.Windows.Forms.Button btnFillAnketa;
         private System.Windows.Forms.Label lblProxyInfo;
         private System.Windows.Forms.Button btnUseProxy;
         private System.Windows.Forms.TextBox txtProxyInput;
