@@ -8,9 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using OpenQA.Selenium;
 using SetProxy;
 using System.Threading;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Chrome;
 
 namespace Anketa
 {
@@ -20,17 +22,21 @@ namespace Anketa
         object lockAction = new object();
         //загрузка завершена
         bool isCompleted = false;
-        IWebDriver browser;
+        IWebDriver browser = new ChromeDriver();
+        DesiredCapabilities dc = new DesiredCapabilities();
+        ChromeOptions option = new ChromeOptions();
+        
 
         public frmMain()
-        {
+        {            
             InitializeComponent();
 
             webBrz.ProgressChanged += WebBrz_ProgressChanged;
             webBrz.ScriptErrorsSuppressed = true;
 
             //Установка режима совместимости WebBrowser на 11
-            CompabilityLevelClass.SetCompabilityLevel();                    
+            CompabilityLevelClass.SetCompabilityLevel();            
+
         }
 
         //Обработчик события завершения загрузки страницы
@@ -46,11 +52,11 @@ namespace Anketa
         {
             string aptdUrl = @"http://armptd.ru/";
             ////webBrz.Navigate(aptdUrl);
-            WebNavigate(aptdUrl);
+            //WebNavigate(aptdUrl);
 
             string anketaUrl = @"http://nok.rosminzdrav.ru/site.html#!/23/2154#reviews";
             ////webBrz.Navigate(anketaUrl);
-            WebNavigate(anketaUrl);            
+            //WebNavigate(anketaUrl);            
                         
         }       
 
@@ -79,15 +85,20 @@ namespace Anketa
 
         private void btnUseProxy_Click(object sender, EventArgs e)
         {
-            WinInetInterop.SetConnectionProxy(txtProxyInput.Text);
-            lblProxyInfo.Text = txtProxyInput.Text;
+            //WinInetInterop.SetConnectionProxy(txtProxyInput.Text);
+            option.AddArgument($"--proxy-server=http://{txtProxyInput.Text}:{txtPortInput.Text}");
+            browser = new ChromeDriver(option);
+            browser.Navigate().GoToUrl(txtUrlInput.Text);
+            
+            //lblProxyInfo.Text = string.Format($"{txtProxyInput.Text}:{txtPortInput.Text}");
         }
 
         private void btnGo_Click(object sender, EventArgs e)
         {
             //webBrz.Url = new Uri(txtUrlInput.Text);
             //WebNavigate(txtUrlInput.Text);
-            webBrz.Navigate(txtUrlInput.Text);
+            //webBrz.Navigate(txtUrlInput.Text);
+            //browser.Navigate().GoToUrl(txtUrlInput.Text);
         }
     }
 }
