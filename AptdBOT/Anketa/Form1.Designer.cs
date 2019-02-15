@@ -41,9 +41,9 @@
             // 
             this.lblProxyInfo.AutoSize = true;
             this.lblProxyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblProxyInfo.Location = new System.Drawing.Point(3, 43);
+            this.lblProxyInfo.Location = new System.Drawing.Point(3, 54);
             this.lblProxyInfo.Name = "lblProxyInfo";
-            this.lblProxyInfo.Size = new System.Drawing.Size(260, 18);
+            this.lblProxyInfo.Size = new System.Drawing.Size(314, 22);
             this.lblProxyInfo.TabIndex = 6;
             this.lblProxyInfo.Text = "Proxy (HTTPS only): 0.0.0.0:0000";
             // 
@@ -51,11 +51,11 @@
             // 
             this.btnUseProxy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUseProxy.Location = new System.Drawing.Point(6, 173);
+            this.btnUseProxy.Location = new System.Drawing.Point(7, 216);
             this.btnUseProxy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUseProxy.Name = "btnUseProxy";
-            this.btnUseProxy.Size = new System.Drawing.Size(351, 47);
-            this.btnUseProxy.TabIndex = 2;
+            this.btnUseProxy.Size = new System.Drawing.Size(395, 59);
+            this.btnUseProxy.TabIndex = 3;
             this.btnUseProxy.Text = "Применить proxy и перейти на введенный сайт";
             this.btnUseProxy.UseVisualStyleBackColor = true;
             this.btnUseProxy.Click += new System.EventHandler(this.btnUseProxy_Click);
@@ -64,21 +64,21 @@
             // 
             this.txtProxyInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProxyInput.Location = new System.Drawing.Point(6, 69);
+            this.txtProxyInput.Location = new System.Drawing.Point(7, 86);
             this.txtProxyInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtProxyInput.Name = "txtProxyInput";
-            this.txtProxyInput.Size = new System.Drawing.Size(348, 22);
+            this.txtProxyInput.Size = new System.Drawing.Size(391, 26);
             this.txtProxyInput.TabIndex = 1;
             // 
             // txtUrlInput
             // 
             this.txtUrlInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUrlInput.Location = new System.Drawing.Point(6, 136);
+            this.txtUrlInput.Location = new System.Drawing.Point(7, 170);
             this.txtUrlInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUrlInput.Name = "txtUrlInput";
-            this.txtUrlInput.Size = new System.Drawing.Size(348, 22);
-            this.txtUrlInput.TabIndex = 3;
+            this.txtUrlInput.Size = new System.Drawing.Size(391, 26);
+            this.txtUrlInput.TabIndex = 2;
             // 
             // lblUrl
             // 
@@ -86,9 +86,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUrl.AutoSize = true;
             this.lblUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblUrl.Location = new System.Drawing.Point(85, 106);
+            this.lblUrl.Location = new System.Drawing.Point(96, 132);
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(163, 18);
+            this.lblUrl.Size = new System.Drawing.Size(195, 22);
             this.lblUrl.TabIndex = 8;
             this.lblUrl.Text = "Сайт для перехода:";
             // 
@@ -96,9 +96,9 @@
             // 
             this.lblCurrentIp.AutoSize = true;
             this.lblCurrentIp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCurrentIp.Location = new System.Drawing.Point(3, 10);
+            this.lblCurrentIp.Location = new System.Drawing.Point(3, 12);
             this.lblCurrentIp.Name = "lblCurrentIp";
-            this.lblCurrentIp.Size = new System.Drawing.Size(151, 18);
+            this.lblCurrentIp.Size = new System.Drawing.Size(184, 22);
             this.lblCurrentIp.TabIndex = 9;
             this.lblCurrentIp.Text = "Текущий IP-адрес:";
             // 
@@ -106,20 +106,20 @@
             // 
             this.btnAnketa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAnketa.Location = new System.Drawing.Point(6, 235);
+            this.btnAnketa.Location = new System.Drawing.Point(7, 294);
             this.btnAnketa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAnketa.Name = "btnAnketa";
-            this.btnAnketa.Size = new System.Drawing.Size(351, 47);
-            this.btnAnketa.TabIndex = 10;
+            this.btnAnketa.Size = new System.Drawing.Size(395, 59);
+            this.btnAnketa.TabIndex = 4;
             this.btnAnketa.Text = "Перейти на сайт анкеты";
             this.btnAnketa.UseVisualStyleBackColor = true;
             this.btnAnketa.Click += new System.EventHandler(this.btnAnketa_Click);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 294);
+            this.ClientSize = new System.Drawing.Size(408, 368);
             this.Controls.Add(this.btnAnketa);
             this.Controls.Add(this.lblCurrentIp);
             this.Controls.Add(this.lblUrl);

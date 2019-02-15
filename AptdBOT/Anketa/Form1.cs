@@ -14,6 +14,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Chrome;
 using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Anketa
 {    
@@ -23,21 +24,80 @@ namespace Anketa
         ChromeOptions option = new ChromeOptions(); //Объект управления настройками браузера Chrome
         DesiredCapabilities dc = new DesiredCapabilities(); //Объект управления настроек Selenium
 
-        string currExternIP = new WebClient().DownloadString("https://api.ipify.org");
+        BinaryFormatter binFormatter = new BinaryFormatter();
+
+        //Текущий ip-адрес
+        string currExternIP = new WebClient().DownloadString("https://api.ipify.org"); 
 
 
         public frmMain()
         {            
-            InitializeComponent();            
-
+            InitializeComponent();
+            
             SetProxy(ref option, ref browser);
         }
 
         private void btnUseProxy_Click(object sender, EventArgs e)
-        {            
+        {
             SetProxy(ref option, ref browser);
+
+            if (txtProxyInput.Text != string.Empty)
+            {
+                if (File.Exists("proxyList.txt"))
+                {
+                    CheckSavedProxy();
+                }
+                else
+                {
+                    SaveProxy();
+                } 
+            }
+            else
+            {
+                MessageBox.Show($"Введите данные proxy!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
-        
+
+        private void CheckSavedProxy()
+        {
+            using (StreamReader sr = new StreamReader("proxyList.txt", Encoding.Default))
+            {
+                List<string> savedIP = new List<string>();
+                string enteredIpVal = txtProxyInput.Text;
+
+                while (!sr.EndOfStream)
+                {                     
+                    savedIP.Add(sr.ReadLine());
+                }
+
+                foreach (var el in savedIP)
+                {
+                    if (enteredIpVal.Equals(el))
+                    {
+                        MessageBox.Show($"Данный proxy уже использовался", "Внимание",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    }
+                    else
+                    {
+                        sr.Close();
+                        SaveProxy();
+                    }
+                }
+
+            }            
+        }
+
+        private void SaveProxy()
+        {
+            MessageBox.Show($"Proxy сохранен в списке использовавшихся!", "Внимание",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (StreamWriter sw = new StreamWriter("proxyList.txt", true, Encoding.Default))
+            {
+                sw.WriteLine(txtProxyInput.Text);
+            }            
+        }
+
         private void SetProxy(ref ChromeOptions opt, ref IWebDriver brows)
         {            
             if (txtProxyInput.Text.Length != 0)
