@@ -34,12 +34,11 @@
             this.txtUrlInput = new System.Windows.Forms.TextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.lblCurrentIp = new System.Windows.Forms.Label();
+            this.btnAnketa = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblProxyInfo
             // 
-            this.lblProxyInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProxyInfo.AutoSize = true;
             this.lblProxyInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblProxyInfo.Location = new System.Drawing.Point(3, 43);
@@ -57,7 +56,7 @@
             this.btnUseProxy.Name = "btnUseProxy";
             this.btnUseProxy.Size = new System.Drawing.Size(351, 47);
             this.btnUseProxy.TabIndex = 2;
-            this.btnUseProxy.Text = "Применить proxy и перейти на сайт";
+            this.btnUseProxy.Text = "Применить proxy и перейти на введенный сайт";
             this.btnUseProxy.UseVisualStyleBackColor = true;
             this.btnUseProxy.Click += new System.EventHandler(this.btnUseProxy_Click);
             // 
@@ -103,11 +102,25 @@
             this.lblCurrentIp.TabIndex = 9;
             this.lblCurrentIp.Text = "Текущий IP-адрес:";
             // 
+            // btnAnketa
+            // 
+            this.btnAnketa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAnketa.Location = new System.Drawing.Point(6, 235);
+            this.btnAnketa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAnketa.Name = "btnAnketa";
+            this.btnAnketa.Size = new System.Drawing.Size(351, 47);
+            this.btnAnketa.TabIndex = 10;
+            this.btnAnketa.Text = "Перейти на сайт анкеты";
+            this.btnAnketa.UseVisualStyleBackColor = true;
+            this.btnAnketa.Click += new System.EventHandler(this.btnAnketa_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 227);
+            this.ClientSize = new System.Drawing.Size(363, 294);
+            this.Controls.Add(this.btnAnketa);
             this.Controls.Add(this.lblCurrentIp);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.txtUrlInput);
@@ -118,6 +131,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "APTD Bot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,6 +144,7 @@
         private System.Windows.Forms.TextBox txtUrlInput;
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.Label lblCurrentIp;
+        private System.Windows.Forms.Button btnAnketa;
     }
 }
 

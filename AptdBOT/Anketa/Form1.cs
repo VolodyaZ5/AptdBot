@@ -16,13 +16,10 @@ using OpenQA.Selenium.Chrome;
 using System.Net;
 
 namespace Anketa
-{
+{    
     public partial class frmMain : Form
-    {        
-        //object lockAction = new object(); //Заблокировать действие до завершения загрузки
-        //bool isCompleted = false; //загрузка завершена
-
-        IWebDriver browser = new ChromeDriver(); //Объект веб драйвера управления браузером Chrome
+    {
+        IWebDriver browser = new ChromeDriver(); //Объект веб драйвера управления браузером Chrome        
         ChromeOptions option = new ChromeOptions(); //Объект управления настройками браузера Chrome
         DesiredCapabilities dc = new DesiredCapabilities(); //Объект управления настроек Selenium
 
@@ -31,62 +28,42 @@ namespace Anketa
 
         public frmMain()
         {            
-            InitializeComponent();
-            //webBrz.ProgressChanged += WebBrz_ProgressChanged;
-            //webBrz.ScriptErrorsSuppressed = true;
-            //CompabilityLevelClass.SetCompabilityLevel(); //Установка режима совместимости WebBrowser на 11
+            InitializeComponent();            
+
+            SetProxy(ref option, ref browser);
         }
 
-        #region PrivateMethods
-
-        /// <summary>
-        /// Переход на url
-        /// </summary>
-        /// <param name="aptdUrl">Адрес сайта</param>
-        //private void WebNavigate(string aptdUrl)
-        //{
-        //    lock (lockAction)
-        //    {
-                
-        //        //webBrz.Navigate(aptdUrl);
-
-        //        isCompleted = false;
-        //        while (isCompleted == false)
-        //        {
-        //            Application.DoEvents();
-        //        }
-        //    }
-        //}
-
-        //Обработчик события завершения загрузки страницы
-        //private void WebBrz_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
-        //{
-        //    if (webBrz.ReadyState == WebBrowserReadyState.Complete)
-        //    {
-        //        isCompleted = true;
-        //    }
-        //}
-
-        #endregion
-
         private void btnUseProxy_Click(object sender, EventArgs e)
-        {
-            //WinInetInterop.SetConnectionProxy(txtProxyInput.Text);
-
-            lblProxyInfo.Text = txtProxyInput.Text;
+        {            
+            SetProxy(ref option, ref browser);
+        }
+        
+        private void SetProxy(ref ChromeOptions opt, ref IWebDriver brows)
+        {            
             if (txtProxyInput.Text.Length != 0)
             {
-                option.AddArgument($"--proxy-server=http://{txtProxyInput.Text}");
-                browser = new ChromeDriver(option);
-                browser.Navigate().GoToUrl($"https://{txtUrlInput.Text}");
+                opt.AddArgument($"--proxy-server=http://{txtProxyInput.Text}");
+                brows.Quit();
+                
+                brows = new ChromeDriver(opt);
+                brows.Navigate().GoToUrl($"https://{txtUrlInput.Text}");                
                 lblCurrentIp.Text = "Текущий IP-адрес:" + txtProxyInput.Text;
             }
             else
             {
                 lblCurrentIp.Text = "Текущий IP-адрес:" + currExternIP;
-                browser.Navigate().GoToUrl($"https://{txtUrlInput.Text}");
+                brows.Navigate().GoToUrl($"https://{txtUrlInput.Text}");                
             }
-            
-        }        
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            browser.Quit();
+        }
+
+        private void btnAnketa_Click(object sender, EventArgs e)
+        {
+            browser.Navigate().GoToUrl($"http://nok.rosminzdrav.ru/site.html#!/23/2154#reviews");            
+        }
     }
 }
