@@ -13,52 +13,29 @@ using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Chrome;
+using System.Net;
 
 namespace Anketa
 {
     public partial class frmMain : Form
-    {
-        //Заблокировать действие до завершения загрузки
-        object lockAction = new object();
-        //загрузка завершена
-        bool isCompleted = false;
-        IWebDriver browser = new ChromeDriver();
-        DesiredCapabilities dc = new DesiredCapabilities();
-        ChromeOptions option = new ChromeOptions();
-        
+    {        
+        //object lockAction = new object(); //Заблокировать действие до завершения загрузки
+        //bool isCompleted = false; //загрузка завершена
+
+        IWebDriver browser = new ChromeDriver(); //Объект веб драйвера управления браузером Chrome
+        ChromeOptions option = new ChromeOptions(); //Объект управления настройками браузера Chrome
+        DesiredCapabilities dc = new DesiredCapabilities(); //Объект управления настроек Selenium
+
+        string currExternIP = new WebClient().DownloadString("https://api.ipify.org");
+
 
         public frmMain()
         {            
             InitializeComponent();
-
-            webBrz.ProgressChanged += WebBrz_ProgressChanged;
-            webBrz.ScriptErrorsSuppressed = true;
-
-            //Установка режима совместимости WebBrowser на 11
-            CompabilityLevelClass.SetCompabilityLevel();            
-
+            //webBrz.ProgressChanged += WebBrz_ProgressChanged;
+            //webBrz.ScriptErrorsSuppressed = true;
+            //CompabilityLevelClass.SetCompabilityLevel(); //Установка режима совместимости WebBrowser на 11
         }
-
-        //Обработчик события завершения загрузки страницы
-        private void WebBrz_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
-        {
-            if (webBrz.ReadyState == WebBrowserReadyState.Complete)
-            {
-                isCompleted = true;
-            }
-        }
-
-        private void btnToSite_Click(object sender, EventArgs e)
-        {
-            string aptdUrl = @"http://armptd.ru/";
-            ////webBrz.Navigate(aptdUrl);
-            //WebNavigate(aptdUrl);
-
-            string anketaUrl = @"http://nok.rosminzdrav.ru/site.html#!/23/2154#reviews";
-            ////webBrz.Navigate(anketaUrl);
-            //WebNavigate(anketaUrl);            
-                        
-        }       
 
         #region PrivateMethods
 
@@ -66,39 +43,50 @@ namespace Anketa
         /// Переход на url
         /// </summary>
         /// <param name="aptdUrl">Адрес сайта</param>
-        private void WebNavigate(string aptdUrl)
-        {
-            lock (lockAction)
-            {
+        //private void WebNavigate(string aptdUrl)
+        //{
+        //    lock (lockAction)
+        //    {
                 
-                webBrz.Navigate(aptdUrl);
+        //        //webBrz.Navigate(aptdUrl);
 
-                isCompleted = false;
-                while (isCompleted == false)
-                {
-                    Application.DoEvents();
-                }
-            }
-        }
+        //        isCompleted = false;
+        //        while (isCompleted == false)
+        //        {
+        //            Application.DoEvents();
+        //        }
+        //    }
+        //}
+
+        //Обработчик события завершения загрузки страницы
+        //private void WebBrz_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
+        //{
+        //    if (webBrz.ReadyState == WebBrowserReadyState.Complete)
+        //    {
+        //        isCompleted = true;
+        //    }
+        //}
 
         #endregion
 
         private void btnUseProxy_Click(object sender, EventArgs e)
         {
             //WinInetInterop.SetConnectionProxy(txtProxyInput.Text);
-            option.AddArgument($"--proxy-server=http://{txtProxyInput.Text}:{txtPortInput.Text}");
-            browser = new ChromeDriver(option);
-            browser.Navigate().GoToUrl(txtUrlInput.Text);
-            
-            //lblProxyInfo.Text = string.Format($"{txtProxyInput.Text}:{txtPortInput.Text}");
-        }
 
-        private void btnGo_Click(object sender, EventArgs e)
-        {
-            //webBrz.Url = new Uri(txtUrlInput.Text);
-            //WebNavigate(txtUrlInput.Text);
-            //webBrz.Navigate(txtUrlInput.Text);
-            //browser.Navigate().GoToUrl(txtUrlInput.Text);
-        }
+            lblProxyInfo.Text = txtProxyInput.Text;
+            if (txtProxyInput.Text.Length != 0)
+            {
+                option.AddArgument($"--proxy-server=http://{txtProxyInput.Text}");
+                browser = new ChromeDriver(option);
+                browser.Navigate().GoToUrl($"https://{txtUrlInput.Text}");
+                lblCurrentIp.Text = "Текущий IP-адрес:" + txtProxyInput.Text;
+            }
+            else
+            {
+                lblCurrentIp.Text = "Текущий IP-адрес:" + currExternIP;
+                browser.Navigate().GoToUrl($"https://{txtUrlInput.Text}");
+            }
+            
+        }        
     }
 }
